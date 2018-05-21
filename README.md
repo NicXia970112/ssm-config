@@ -272,6 +272,6 @@ jdbc.password = your password
     
 </beans>
 ```
-看 context:property-placeholder ,我们就是从这里引入数据库的信息。引入之后，我们用引入的信息配置好数据源dataSource(这里用的实现类是cep0连接池)的属性。这样，我们就配置好了数据源，从而通过操作这个数据源操作数据库。有了数据源，我们就可以整合spring和mybatis框架了，我们通过配置的方式向spring中注入SqlSessionFactory对象（学了mybatis后你就知道，mybatis对数据库的操作是通过它得到SqlSession对象），同时向这个对象中注入相应的属性。
+看 context:property-placeholder ,我们就是从这里引入数据库的信息。引入之后，我们向Spring容器中注入dataSource对象（数据源），然后，我们用引入的信息配置好数据源的属性。这样，我们就配置好了数据源，从而通过操作这个数据源操作数据库。有了数据源，我们就可以整合spring和mybatis框架了，我们通过配置的方式向spring中注入SqlSessionFactory对象（学了mybatis后你就知道，mybatis对数据库的操作是通过它得到SqlSession对象），同时向这个对象中注入相应的属性。
 
 
