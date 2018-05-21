@@ -396,5 +396,5 @@ jdbc.password = your password
 ```
 通过这个url-pattern把所有的请求都匹配到这个servlet中，context-param是这个应用在响应请求之前就会去读取的配置（其配置供所有servlet使用），init-param是这个servlet第一次响应请求之前会去读取的配置（其配置只有自己能够使用）。照理说我可以在init-param中导入所有的配置文件，因为一个webapp可能需要配置多个servlet，所以把对这些servlet来说都一样(spring-dao.xml.spring-service.xml)的配置写在context-param里面，把不一样的配置（spring-web.xml）写在每个servlet的init-param里面。
 
-##结束
+## 结束
 当你照着做到这里，一个整合好的ssm框架就等着你coding了。如果你想看一个ssm项目是怎样写的，这里有一个我写的[迷你demo](https://github.com/NicXia970112/SSM-demo)。
