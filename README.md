@@ -274,6 +274,6 @@ jdbc.password = your password
 ```
 - dao(data to access),就是把数据库的数据注入到对象中，这一层我们利用mybatis的代理对象方式（只写接口，让mybatis框架帮我们代理生成对应的实现类）。
 
-- 看 context:property-placeholder ,我们就是从这里引入数据库的信息。引入之后，我们向Spring容器中注入dataSource对象（数据源），然后，我们用引入的信息配置好数据源的属性。这样，我们就配置好了数据源，从而通过操作这个数据源操作数据库。有了数据源，我们就可以整合spring和mybatis框架了，我们通过配置的方式向spring中注入SqlSessionFactory对象（学了mybatis后你就知道，mybatis对数据库的操作是通过它得到SqlSession对象，然后通过SqlSession的getMapper方法获得代理对象），同时向这个对象中注入相应的属性。有了可以生成代理对象的SqlSessionFactory,如何把它生成的代理对象和dao包里的接口对应起来？我们只需要向spring容器中注入 org.mybatis.spring.mapper.MapperScannerConfigurer 这个类，然后把刚才注入的SqlSessionFactory和对应的dao包绝对路径注入到他的属性就好了。
+- 看 context:property-placeholder ,我们就是从这里引入数据库的信息。引入之后，我们向Spring容器中注入dataSource对象（数据源），然后，我们用引入的信息配置好数据源的属性。这样，我们就配置好了数据源，从而通过操作这个数据源操作数据库。有了数据源，我们就可以整合spring和mybatis框架了，我们通过配置的方式向spring中注入SqlSessionFactory对象（学了mybatis后你就知道，mybatis对数据库的操作是通过它得到SqlSession对象，然后通过SqlSession的getMapper方法获得代理对象），同时向这个对象中注入相应的属性。最后，我们向spring容器中注入 org.mybatis.spring.mapper.MapperScannerConfigurer ，并把sqlSessionFactory和dao包的绝对路径注入到它的属性中，这个对象会扫描dao包，并把包内dao接口的代理对象自动注入到spring容器中。
 
-
+- 你可能好奇既然要生成dao接口对应的代理对象，怎么把他们对应起来？要实现对应，我们编写dao接口和dao接口对应的mapper.xml时要遵循开发规范。mapper.xml的namespace必需是对应的dao接口的绝对路径。 

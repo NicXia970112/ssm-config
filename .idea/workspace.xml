@@ -51,8 +51,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="322">
-                <caret line="276" column="378" selection-start-line="276" selection-start-column="378" selection-end-line="276" selection-end-column="378" />
+              <first_editor relative-caret-position="352">
+                <caret line="278" column="167" selection-start-line="278" selection-start-column="167" selection-end-line="278" selection-end-column="167" />
                 <folding>
                   <element signature="e#693#709#0" expanded="true" />
                   <element signature="e#751#764#0" expanded="true" />
@@ -301,16 +301,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1526884209250</updated>
-      <workItem from="1526884211084" duration="7461000" />
+      <workItem from="1526884211084" duration="9047000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7461000" />
+    <option name="totallyTimeSpent" value="9047000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1366" height="743" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
@@ -332,8 +331,8 @@
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Thumbnails" weight="0.32843137" />
       <window_info anchor="bottom" id="Spring" />
-      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.19016394" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.006818182" />
+      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.19016394" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.006818182" />
       <window_info id="Web" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" />
       <window_info id="Favorites" side_tool="true" />
@@ -415,8 +414,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="322">
-            <caret line="276" column="378" selection-start-line="276" selection-start-column="378" selection-end-line="276" selection-end-column="378" />
+          <first_editor relative-caret-position="352">
+            <caret line="278" column="167" selection-start-line="278" selection-start-column="167" selection-end-line="278" selection-end-column="167" />
             <folding>
               <element signature="e#693#709#0" expanded="true" />
               <element signature="e#751#764#0" expanded="true" />
