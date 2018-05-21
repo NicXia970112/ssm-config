@@ -355,6 +355,8 @@ jdbc.password = your password
 
 - 这里首先说一下按照j2ee规范，一个部署在web容器的webapp必须是这样的结构
 
-![]()
+![](https://github.com/NicXia970112/ssm-config/blob/master/src/main/webapp/resources/Screenshot%20from%202018-05-21%2021-03-48.png)
 
-![]()
+![](https://github.com/NicXia970112/ssm-config/blob/master/src/main/webapp/resources/Screenshot%20from%202018-05-21%2021-04-11.png)
+
+图不是这个项目的，是一个已经部署到tomcat的应用。所以只讲一下图中重要的，一个webapp文件夹必须包含一个WEB-INF文件夹，名字大小写必须一样；WEB-INF文件夹中必须包含一个web.xml。tomcat启动时就会去读这个web.xml，从而获取你这个应用的信息。我们之前在spring-dao.xml.spring-service.xml,spring-web.xml中将mybatis,事物管理,spring-mvc分别和spring容器整合在了一起，那么怎样把这三部分再整合在一个应用程序中呢？就在这个web.xml中。
