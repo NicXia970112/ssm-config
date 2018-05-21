@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ccaca473-838e-4bd9-8961-e7295acdaede" name="Default" comment="" />
+    <list default="true" id="ccaca473-838e-4bd9-8961-e7295acdaede" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,8 +51,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="-998">
-                <caret line="188" column="13" selection-start-line="188" selection-start-column="13" selection-end-line="188" selection-end-column="13" />
+              <first_editor relative-caret-position="322">
+                <caret line="276" column="378" selection-start-line="276" selection-start-column="378" selection-end-line="276" selection-end-column="378" />
                 <folding>
                   <element signature="e#693#709#0" expanded="true" />
                   <element signature="e#751#764#0" expanded="true" />
@@ -299,15 +301,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1526884209250</updated>
-      <workItem from="1526884211084" duration="6733000" />
+      <workItem from="1526884211084" duration="7461000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6733000" />
+    <option name="totallyTimeSpent" value="7461000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1366" height="743" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
@@ -412,8 +415,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="-998">
-            <caret line="188" column="13" selection-start-line="188" selection-start-column="13" selection-end-line="188" selection-end-column="13" />
+          <first_editor relative-caret-position="322">
+            <caret line="276" column="378" selection-start-line="276" selection-start-column="378" selection-end-line="276" selection-end-column="378" />
             <folding>
               <element signature="e#693#709#0" expanded="true" />
               <element signature="e#751#764#0" expanded="true" />
