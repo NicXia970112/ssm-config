@@ -184,3 +184,94 @@
 
 多说一点，每一个dependency节点就是一个jar包，如果你去maven仓库搜一个jar包，会是这样的 net.sf.spring-json:spring-json:1.3.1 ,你只需要把:号隔开的三部分依次输入<dependency>下的每一个节点就好了。当然由于那道伟大的墙，这个过程可能是一万年。
 
+- 编写数据库信息 /src/main/resources/jdbc.properties
+
+```xml
+jdbc.driver = com.mysql.jdbc.Driver
+jdbc.url = jdbc:mysql://localhost:3306/Contact?useUnicode=true&characterEncoding=utf8
+jdbc.username = your name
+jdbc.password = your password
+```
+
+很好理解，就是你要连接的数据库服务器的驱动，服务器的哪个数据库，用户名和密码。为了减少硬编码，让项目耦合低一点，我们单独把它写出来。
+
+- 编写日志信息 /src/main/resources/logback.xml
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are by default assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
+``` 
+
+我们可能会要用到logback这个日志功能，所以就要配置它。
+
+- 编写mybatis框架的信息 /src/main/resources/mybatis-config.xml
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 配置全局属性 -->
+    <settings>
+        <!-- 使用jdbc的getGeneratedKeys获取数据库自增主键值 -->
+        <setting name="useGeneratedKeys" value="true" />
+
+        <!-- 使用列别名替换列名 默认:true -->
+        <setting name="useColumnLabel" value="true" />
+
+        <!-- 开启驼峰命名转换:Table{create_time} -> Entity{createTime} -->
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+    </settings>
+</configuration>
+```
+这里我们配置mybatis框架要开启的功能，如果你要开启更多的功能也写在这里。
+
+### 进入正题，配置spring
+我们采取从最底层（存取数据库）开始往上配置。
+
+- 配置/src/main/resources/spring/spring-dao.xml
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" >
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <bean id = "sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="typeAliasesPackage" value="space.nicxia.entity, space.nicxia.dto"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+        <property name="basePackage" value="space.nicxia.dao"/>
+    </bean>
+    
+</beans>
+```
+看 context:property-placeholder ,我们就是从这里引入数据库的信息。引入之后，我们用引入的信息配置好数据源dataSource(这里用的实现类是cep0连接池)的属性。这样，我们就配置好了数据源，从而通过操作这个数据源操作数据库。有了数据源，我们就可以整合spring和mybatis框架了，我们通过配置的方式向spring中注入SqlSessionFactory对象（学了mybatis后你就知道，mybatis对数据库的操作是通过它得到SqlSession对象），同时向这个对象中注入相应的属性。
+
+
