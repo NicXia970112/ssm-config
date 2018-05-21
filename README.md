@@ -239,7 +239,7 @@ jdbc.password = your password
 ### 进入正题，配置spring
 我们采取从最底层（存取数据库）开始往上配置。
 
-- 配置/src/main/resources/spring/spring-dao.xml
+> 配置/src/main/resources/spring/spring-dao.xml
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -280,3 +280,81 @@ jdbc.password = your password
 - 最后，我们向spring容器中注入 org.mybatis.spring.mapper.MapperScannerConfigurer ，并把sqlSessionFactory和dao包的绝对路径注入到它的属性中，这个对象会扫描dao包，并把包内dao接口的代理对象自动注入到spring容器中。
 
 - 你可能好奇既然要生成dao接口对应的代理对象，怎么把他们对应起来？要实现对应，我们编写dao接口和dao接口对应的mapper.xml时要遵循开发规范。mapper.xml的namespace必需是对应的dao接口的绝对路径。我们在SqlSessionFactory中配置了mapperLocations,这个路径下的每一个mapper.xml就对应一个dao接口。
+
+> 配置spring-service.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <context:component-scan base-package="space.nicxia.serviceImpl"/>
+</beans>
+
+```
+
+- 将事物管理器（transactionManager）注入到spring容器中，同时在属性中注入事务管理对应的数据源
+
+- 通过注解驱动的方式开启事物管理（transactionManager）
+
+- 扫描service包，将@Service注解的类导入到spring容器中
+
+> 配置spring-web.xml
+
+```xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+    <mvc:annotation-driven/>
+
+    <mvc:default-servlet-handler/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <context:component-scan base-package="space.nicxia.web"/>
+</beans>
+```
+
+- 开启注解驱动
+
+- 开启静态文件解析
+
+- 将视图解析器注入到spring容器中
+
+- 扫描web包，将@Controller注解的类注入容器中
+
+> 配置web.xml
+
+- 这里首先说一下按照j2ee规范，一个部署在web容器的webapp必须是这样的结构
+
+![]()
+
+![]()
