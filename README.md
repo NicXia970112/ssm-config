@@ -6,7 +6,7 @@
 
 ## 步骤
 
-- 创建和我一样的文件结构 (.idea README.md ssm.iml是IEAD生成的，其他的如果没有请手动创建和图上保持一致)
+- 创建和图一样的文件结构 (.idea README.md ssm.iml是IEAD生成的，其他的如果没有请手动创建和图上保持一致)
 
 ![](https://github.com/NicXia970112/ssm-config/blob/master/src/main/webapp/resources/Screenshot%20from%202018-05-21%2015-05-34.png)  
 
