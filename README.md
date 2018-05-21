@@ -186,7 +186,7 @@
 
 - 编写数据库信息 /src/main/resources/jdbc.properties
 
-```xml
+```properties
 jdbc.driver = com.mysql.jdbc.Driver
 jdbc.url = jdbc:mysql://localhost:3306/Contact?useUnicode=true&characterEncoding=utf8
 jdbc.username = your name
