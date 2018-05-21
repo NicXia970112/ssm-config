@@ -6,6 +6,12 @@
 
 ## 步骤
 
-- 创建和我一样的文件结构 ![]()  ![]()  ![]()
+- 创建和我一样的文件结构 
+
+![](https://github.com/NicXia970112/ssm-config/blob/master/src/main/webapp/resources/Screenshot%20from%202018-05-21%2015-05-34.png)  
+
+![](https://github.com/NicXia970112/ssm-config/blob/master/src/main/webapp/resources/Screenshot%20from%202018-05-21%2015-14-17.png) 
+ 
+![](https://github.com/NicXia970112/ssm-config/blob/master/src/main/webapp/resources/Screenshot%20from%202018-05-21%2015-14-53.png)
 
 
