@@ -359,4 +359,39 @@ jdbc.password = your password
 
 ![](https://github.com/NicXia970112/ssm-config/blob/master/src/main/webapp/resources/Screenshot%20from%202018-05-21%2021-04-11.png)
 
-图不是这个项目的，是一个已经部署到tomcat的应用。所以只讲一下图中重要的，一个webapp文件夹必须包含一个WEB-INF文件夹，名字大小写必须一样；WEB-INF文件夹中必须包含一个web.xml。tomcat启动时就会去读这个web.xml，从而获取你这个应用的信息。我们之前在spring-dao.xml.spring-service.xml,spring-web.xml中将mybatis,事物管理,spring-mvc分别和spring容器整合在了一起，那么怎样把这三部分再整合在一个应用程序中呢？就在这个web.xml中。
+图不是这个项目的，是一个已经部署到tomcat的应用。所以只讲一下图中重要的，一个webapp文件夹必须包含一个WEB-INF文件夹，名字大小写必须一样；WEB-INF文件夹中必须包含一个web.xml。tomcat启动时就会去读这个web.xml，从而获取你这个应用的配置信息。我们之前在spring-dao.xml.spring-service.xml,spring-web.xml中将mybatis,事物管理,spring-mvc分别和spring容器整合在了一起，那么怎样把这三部分再整合在一个应用程序中呢？就在这个web.xml中。
+
+```xml
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1" metadata-complete="true">
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring/spring-dao.xml,classpath:spring/spring-service.xml</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+
+
+    <!-- 匹配请求 -->
+    <servlet>
+        <servlet-name>Dispacher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring/spring-web.xml</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Dispacher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+</web-app>
+```
+通过这个url-pattern把所有的请求都匹配到这个servlet中，context-param是这个应用在响应请求之前就会去读取的配置（其配置供所有servlet使用），init-param是这个servlet第一次响应请求之前会去读取的配置（其配置只有自己能够使用）。照理说我可以在init-param中导入所有的配置文件，因为一个webapp可能需要配置多个servlet，所以把对这些servlet来说都一样(spring-dao.xml.spring-service.xml)的配置写在context-param里面，把不一样的配置（spring-web.xml）写在每个servlet的init-param里面。
